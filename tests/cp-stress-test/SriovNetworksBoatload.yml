@@ -1,0 +1,1092 @@
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-boatload-1
+  namespace: openshift-sriov-network-operator
+spec:
+  networkNamespace: boatload-1
+  resourceName: net_resource_boatload_1
+  spoofChk: "on"
+  trust: "off"
+  vlan: 100
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-1
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.1.0/24", "gateway": "10.10.1.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-1
+  resourceName: net_resource_1
+  spoofChk: "on"
+  trust: "off"
+  vlan: 101
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-2
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.2.0/24", "gateway": "10.10.2.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-2
+  resourceName: net_resource_2
+  spoofChk: "on"
+  trust: "off"
+  vlan: 102
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-3
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.3.0/24", "gateway": "10.10.3.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-3
+  resourceName: net_resource_3
+  spoofChk: "on"
+  trust: "off"
+  vlan: 103
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-4
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.4.0/24", "gateway": "10.10.4.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-4
+  resourceName: net_resource_4
+  spoofChk: "on"
+  trust: "off"
+  vlan: 104
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-5
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.5.0/24", "gateway": "10.10.5.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-5
+  resourceName: net_resource_5
+  spoofChk: "on"
+  trust: "off"
+  vlan: 105
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-6
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.6.0/24", "gateway": "10.10.6.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-6
+  resourceName: net_resource_6
+  spoofChk: "on"
+  trust: "off"
+  vlan: 106
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-7
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.7.0/24", "gateway": "10.10.7.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-7
+  resourceName: net_resource_7
+  spoofChk: "on"
+  trust: "off"
+  vlan: 107
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-8
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.8.0/24", "gateway": "10.10.8.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-8
+  resourceName: net_resource_8
+  spoofChk: "on"
+  trust: "off"
+  vlan: 108
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-9
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.9.0/24", "gateway": "10.10.9.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-9
+  resourceName: net_resource_9
+  spoofChk: "on"
+  trust: "off"
+  vlan: 109
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-10
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.10.0/24", "gateway": "10.10.10.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-10
+  resourceName: net_resource_10
+  spoofChk: "on"
+  trust: "off"
+  vlan: 110
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-11
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.11.0/24", "gateway": "10.10.11.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-11
+  resourceName: net_resource_11
+  spoofChk: "on"
+  trust: "off"
+  vlan: 111
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-12
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.12.0/24", "gateway": "10.10.12.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-12
+  resourceName: net_resource_12
+  spoofChk: "on"
+  trust: "off"
+  vlan: 112
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-13
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.13.0/24", "gateway": "10.10.13.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-13
+  resourceName: net_resource_13
+  spoofChk: "on"
+  trust: "off"
+  vlan: 113
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-14
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.14.0/24", "gateway": "10.10.14.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-14
+  resourceName: net_resource_14
+  spoofChk: "on"
+  trust: "off"
+  vlan: 114
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-15
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.15.0/24", "gateway": "10.10.15.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-15
+  resourceName: net_resource_15
+  spoofChk: "on"
+  trust: "off"
+  vlan: 115
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-16
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.16.0/24", "gateway": "10.10.16.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-16
+  resourceName: net_resource_16
+  spoofChk: "on"
+  trust: "off"
+  vlan: 116
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-17
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.17.0/24", "gateway": "10.10.17.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-17
+  resourceName: net_resource_17
+  spoofChk: "on"
+  trust: "off"
+  vlan: 117
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-18
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.18.0/24", "gateway": "10.10.18.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-18
+  resourceName: net_resource_18
+  spoofChk: "on"
+  trust: "off"
+  vlan: 118
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-19
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.19.0/24", "gateway": "10.10.19.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-19
+  resourceName: net_resource_19
+  spoofChk: "on"
+  trust: "off"
+  vlan: 119
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-20
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.20.0/24", "gateway": "10.10.20.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-20
+  resourceName: net_resource_20
+  spoofChk: "on"
+  trust: "off"
+  vlan: 120
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-21
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.21.0/24", "gateway": "10.10.21.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-21
+  resourceName: net_resource_21
+  spoofChk: "on"
+  trust: "off"
+  vlan: 121
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-22
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.22.0/24", "gateway": "10.10.22.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-22
+  resourceName: net_resource_22
+  spoofChk: "on"
+  trust: "off"
+  vlan: 122
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-23
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.23.0/24", "gateway": "10.10.23.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-23
+  resourceName: net_resource_23
+  spoofChk: "on"
+  trust: "off"
+  vlan: 123
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-24
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.24.0/24", "gateway": "10.10.24.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-24
+  resourceName: net_resource_24
+  spoofChk: "on"
+  trust: "off"
+  vlan: 124
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-25
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.25.0/24", "gateway": "10.10.25.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-25
+  resourceName: net_resource_25
+  spoofChk: "on"
+  trust: "off"
+  vlan: 125
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-26
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.26.0/24", "gateway": "10.10.26.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-26
+  resourceName: net_resource_26
+  spoofChk: "on"
+  trust: "off"
+  vlan: 126
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-27
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.27.0/24", "gateway": "10.10.27.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-27
+  resourceName: net_resource_27
+  spoofChk: "on"
+  trust: "off"
+  vlan: 127
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-28
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.28.0/24", "gateway": "10.10.28.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-28
+  resourceName: net_resource_28
+  spoofChk: "on"
+  trust: "off"
+  vlan: 128
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-29
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.29.0/24", "gateway": "10.10.29.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-29
+  resourceName: net_resource_29
+  spoofChk: "on"
+  trust: "off"
+  vlan: 129
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-30
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.30.0/24", "gateway": "10.10.30.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-30
+  resourceName: net_resource_30
+  spoofChk: "on"
+  trust: "off"
+  vlan: 130
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-31
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.31.0/24", "gateway": "10.10.31.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-31
+  resourceName: net_resource_31
+  spoofChk: "on"
+  trust: "off"
+  vlan: 131
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-32
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.32.0/24", "gateway": "10.10.32.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-32
+  resourceName: net_resource_32
+  spoofChk: "on"
+  trust: "off"
+  vlan: 132
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-33
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.33.0/24", "gateway": "10.10.33.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-33
+  resourceName: net_resource_33
+  spoofChk: "on"
+  trust: "off"
+  vlan: 133
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-34
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.34.0/24", "gateway": "10.10.34.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-34
+  resourceName: net_resource_34
+  spoofChk: "on"
+  trust: "off"
+  vlan: 134
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-35
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.35.0/24", "gateway": "10.10.35.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-35
+  resourceName: net_resource_35
+  spoofChk: "on"
+  trust: "off"
+  vlan: 135
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-36
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.36.0/24", "gateway": "10.10.36.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-36
+  resourceName: net_resource_36
+  spoofChk: "on"
+  trust: "off"
+  vlan: 136
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-37
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.37.0/24", "gateway": "10.10.37.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-37
+  resourceName: net_resource_37
+  spoofChk: "on"
+  trust: "off"
+  vlan: 137
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-38
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.38.0/24", "gateway": "10.10.38.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-38
+  resourceName: net_resource_38
+  spoofChk: "on"
+  trust: "off"
+  vlan: 138
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-39
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.39.0/24", "gateway": "10.10.39.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-39
+  resourceName: net_resource_39
+  spoofChk: "on"
+  trust: "off"
+  vlan: 139
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-40
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.40.0/24", "gateway": "10.10.40.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-40
+  resourceName: net_resource_40
+  spoofChk: "on"
+  trust: "off"
+  vlan: 140
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-41
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.41.0/24", "gateway": "10.10.41.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-41
+  resourceName: net_resource_41
+  spoofChk: "on"
+  trust: "off"
+  vlan: 141
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-42
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.42.0/24", "gateway": "10.10.42.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-42
+  resourceName: net_resource_42
+  spoofChk: "on"
+  trust: "off"
+  vlan: 142
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-43
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.43.0/24", "gateway": "10.10.43.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-43
+  resourceName: net_resource_43
+  spoofChk: "on"
+  trust: "off"
+  vlan: 143
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-44
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.44.0/24", "gateway": "10.10.44.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-44
+  resourceName: net_resource_44
+  spoofChk: "on"
+  trust: "off"
+  vlan: 144
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-45
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.45.0/24", "gateway": "10.10.45.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-45
+  resourceName: net_resource_45
+  spoofChk: "on"
+  trust: "off"
+  vlan: 145
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-46
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.46.0/24", "gateway": "10.10.46.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-46
+  resourceName: net_resource_46
+  spoofChk: "on"
+  trust: "off"
+  vlan: 146
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-47
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.47.0/24", "gateway": "10.10.47.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-47
+  resourceName: net_resource_47
+  spoofChk: "on"
+  trust: "off"
+  vlan: 147
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-48
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.48.0/24", "gateway": "10.10.48.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-48
+  resourceName: net_resource_48
+  spoofChk: "on"
+  trust: "off"
+  vlan: 148
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-49
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.49.0/24", "gateway": "10.10.49.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-49
+  resourceName: net_resource_49
+  spoofChk: "on"
+  trust: "off"
+  vlan: 149
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-50
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.50.0/24", "gateway": "10.10.50.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-50
+  resourceName: net_resource_50
+  spoofChk: "on"
+  trust: "off"
+  vlan: 150
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-51
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.51.0/24", "gateway": "10.10.51.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-51
+  resourceName: net_resource_51
+  spoofChk: "on"
+  trust: "off"
+  vlan: 151
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-52
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.52.0/24", "gateway": "10.10.52.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-52
+  resourceName: net_resource_52
+  spoofChk: "on"
+  trust: "off"
+  vlan: 152
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-53
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.53.0/24", "gateway": "10.10.53.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-53
+  resourceName: net_resource_53
+  spoofChk: "on"
+  trust: "off"
+  vlan: 153
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-54
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.54.0/24", "gateway": "10.10.54.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-54
+  resourceName: net_resource_54
+  spoofChk: "on"
+  trust: "off"
+  vlan: 154
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-55
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.55.0/24", "gateway": "10.10.55.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-55
+  resourceName: net_resource_55
+  spoofChk: "on"
+  trust: "off"
+  vlan: 155
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-56
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.56.0/24", "gateway": "10.10.56.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-56
+  resourceName: net_resource_56
+  spoofChk: "on"
+  trust: "off"
+  vlan: 156
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-57
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.57.0/24", "gateway": "10.10.57.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-57
+  resourceName: net_resource_57
+  spoofChk: "on"
+  trust: "off"
+  vlan: 157
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-58
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.58.0/24", "gateway": "10.10.58.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-58
+  resourceName: net_resource_58
+  spoofChk: "on"
+  trust: "off"
+  vlan: 158
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-59
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.59.0/24", "gateway": "10.10.59.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-59
+  resourceName: net_resource_59
+  spoofChk: "on"
+  trust: "off"
+  vlan: 159
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: network-60
+  namespace: openshift-sriov-network-operator
+spec:
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [{"address": "10.10.60.0/24", "gateway": "10.10.60.1" }]
+    }
+  linkState: auto
+  networkNamespace: boatload-bu-60
+  resourceName: net_resource_60
+  spoofChk: "on"
+  trust: "off"
+  vlan: 160

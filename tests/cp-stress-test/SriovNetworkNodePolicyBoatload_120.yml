@@ -1,0 +1,2232 @@
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-boatload-1
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: vfio-pci
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f0#0-1
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 2
+  priority: 99
+  resourceName: net_resource_boatload_1
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-1
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#0-0
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_1
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-2
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#1-1
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_2
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-3
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#2-2
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_3
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-4
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#3-3
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_4
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-5
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#4-4
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_5
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-6
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#5-5
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_6
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-7
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#6-6
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_7
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-8
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#7-7
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_8
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-9
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#8-8
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_9
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-10
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#9-9
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_10
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-11
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#10-10
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_11
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-12
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#11-11
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_12
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-13
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#12-12
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_13
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-14
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#13-13
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_14
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-15
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#14-14
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_15
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-16
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#15-15
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_16
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-17
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#16-16
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_17
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-18
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#17-17
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_18
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-19
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#18-18
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_19
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-20
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#19-19
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_20
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-21
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#20-20
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_21
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-22
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#21-21
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_22
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-23
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#22-22
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_23
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-24
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#23-23
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_24
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-25
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#24-24
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_25
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-26
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#25-25
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_26
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-27
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#26-26
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_27
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-28
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#27-27
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_28
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-29
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#28-28
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_29
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-30
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#29-29
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_30
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-31
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#30-30
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_31
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-32
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#31-31
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_32
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-33
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#32-32
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_33
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-34
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#33-33
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_34
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-35
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#34-34
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_35
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-36
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#35-35
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_36
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-37
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#36-36
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_37
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-38
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#37-37
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_38
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-39
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#38-38
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_39
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-40
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#39-39
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_40
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-41
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#40-40
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_41
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-42
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#41-41
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_42
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-43
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#42-42
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_43
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-44
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#43-43
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_44
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-45
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#44-44
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_45
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-46
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#45-45
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_46
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-47
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#46-46
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_47
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-48
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#47-47
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_48
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-49
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#48-48
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_49
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-50
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#49-49
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_50
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-51
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#50-50
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_51
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-52
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#51-51
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_52
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-53
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#52-52
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_53
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-54
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#53-53
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_54
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-55
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#54-54
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_55
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-56
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#55-55
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_56
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-57
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#56-56
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_57
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-58
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#57-57
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_58
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-59
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#58-58
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_59
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-60
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#59-59
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_60
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-60
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#59-59
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_60
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-60
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#59-59
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_60
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-60
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#59-59
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_60
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-61
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#60-60
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_61
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-62
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#61-61
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_62
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-63
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#62-62
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_63
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-64
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#63-63
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_64
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-65
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#64-64
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_65
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-66
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#65-65
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_66
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-67
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#66-66
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_67
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-68
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#67-67
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_68
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-69
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#68-68
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_69
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-70
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#69-69
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_70
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-71
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#70-70
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_71
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-72
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#71-71
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_72
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-73
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#72-72
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_73
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-74
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#73-73
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_74
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-75
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#74-74
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_75
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-76
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#75-75
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_76
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-77
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#76-76
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_77
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-78
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#77-77
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_78
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-79
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#78-78
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_79
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-80
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#79-79
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_80
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-81
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#80-80
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_81
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-82
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#81-81
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_82
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-83
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#82-82
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_83
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-84
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#83-83
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_84
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-85
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#84-84
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_85
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-86
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#85-85
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_86
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-87
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#86-86
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_87
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-88
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#87-87
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_88
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-89
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#88-88
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_89
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-90
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#89-89
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_90
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-91
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#90-90
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_91
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-92
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#91-91
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_92
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-93
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#92-92
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_93
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-94
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#93-93
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_94
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-95
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#94-94
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_95
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-96
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#95-95
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_96
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-97
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#96-96
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_97
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-98
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#97-97
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_98
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-99
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#98-98
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_99
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-100
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#99-99
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_100
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-101
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#100-100
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_101
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-102
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#101-101
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_102
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-103
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#102-102
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_103
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-104
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#103-103
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_104
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-105
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#104-104
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_105
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-106
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#105-105
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_106
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-107
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#106-106
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_107
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-108
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#107-107
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_108
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-109
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#108-108
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_109
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-110
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#109-109
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_110
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-111
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#110-110
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_111
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-112
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#111-111
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_112
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-113
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#112-112
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_113
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-114
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#113-113
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_114
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-115
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#114-114
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_115
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-116
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#115-115
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_116
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-117
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#116-116
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_117
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-118
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#117-117
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_118  
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-119
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#118-118
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_119
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: network-120
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    pfNames:
+    - ens3f1#119-119
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numVfs: 128
+  priority: 99
+  resourceName: net_resource_120
