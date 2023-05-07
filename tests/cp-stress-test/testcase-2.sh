@@ -35,21 +35,20 @@ test_index=0
 
 # Configmaps and Secrets
 obj_counts="4 8"
+configmap_count=2
+secret_count=4
 annotations=" cpu-load-balancing.crio.io=\''true'\' irq-load-balancing.crio.io=\''disable'\' cpu-quota.crio.io=\''disable'\' "
-resources=" --cpu-requests 50 --memory-requests 100 "
-for obj_count in ${obj_counts}; do
+resources=" --cpu-requests 100 --memory-requests 100 "
   for iteration in `seq 1 ${iterations}`; do
     test_index=$((${test_index} + 1))
-    echo "$(date -u +%Y%m%d-%H%M%S) - node density ${tc_num}.${test_index} - ${iteration}/${iterations} - ${total_pods} namespaces, 1 deploy, 1 pod, 1 container, gohttp image, 1 service, 1 route, no probes, ${obj_count} configmaps, ${obj_count} secrets, resources set"
+    echo "$(date -u +%Y%m%d-%H%M%S) - node density ${tc_num}.${test_index} - ${iteration}/${iterations} - ${total_pods} namespaces, 1 deploy, 1 pod, 1 container, gohttp image, 1 service, 1 route, no probes, ${configmap_count} configmaps, ${secret_count} secrets, resources set"
     logfile="../logs/$(date -u +%Y%m%d-%H%M%S)-nodedensity-${tc_num}.${test_index}.log"
     source namespace-create.sh
-    sleep 500
-    ../../boatload/boatload-sno-du-profile.py ${dryrun} ${csvfile} --csv-title "${total_pods}n-1d-1p-1c-gubu-${obj_count}cm-${obj_count}s-${iteration}" -n ${total_pods} -d 1 -p 1 -c 1 -v 1 -l -r -m ${obj_count} --secrets ${obj_count} --no-probes ${resources} ${gohttp_env_vars} ${measurement} ${INDEX_ARGS} &> ${logfile} --enable-pod-annotations -a ${annotations}
-    oc delete $(oc get pv -o name)
+    sleep 180
+    ../../boatload/boatload-sno-du-profile.py ${dryrun} ${csvfile} --csv-title "${total_pods}n-1d-1p-1c-gubu-${obj_count}cm-${obj_count}s-${iteration}" -n ${total_pods} -d 1 -p 1 -c 1 -v 1 -l -r -m ${configmap_count} --secrets ${secret_count} --no-probes ${resources} ${gohttp_env_vars} ${measurement} ${INDEX_ARGS} &> ${logfile} --enable-pod-annotations -a ${annotations}
     echo "$(date -u +%Y%m%d-%H%M%S) - node density ${tc_num}.${test_index} - ${iteration}/${iterations} complete, sleeping ${sleep_period}"
     sleep ${sleep_period}
     echo "****************************************************************************************************************************************"
   done
-done
 
 echo "$(date -u +%Y%m%d-%H%M%S) - Test Case ${tc_num} Complete"

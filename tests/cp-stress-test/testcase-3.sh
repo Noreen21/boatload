@@ -59,7 +59,7 @@ probes_csv_titles+=("${probe_type}-s10-l10-r10-2")
 #probes_csv_titles+=("${probe_type}-s1-l1-r1")
 
 annotations=" cpu-load-balancing.crio.io=\''true'\' irq-load-balancing.crio.io=\''disable'\' cpu-quota.crio.io=\''disable'\' "
-resources=" --cpu-requests 50 --memory-requests 100 "
+resources=" --cpu-requests 100 --memory-requests 100 "
 
 for (( index=0; index<${#probes[@]}; index++)); do
   for iteration in `seq 1 ${iterations}`; do
@@ -67,9 +67,8 @@ for (( index=0; index<${#probes[@]}; index++)); do
     echo "$(date -u +%Y%m%d-%H%M%S) - node density ${tc_num}.${test_index} - ${iteration}/${iterations} - ${total_pods} namespaces, 1 deploy, 1 pod, 1 container, gohttp image, 1 service, 1 route, ${probes[$index]}, no configmaps, no secrets, resources set"
     logfile="../logs/$(date -u +%Y%m%d-%H%M%S)-nodedensity-${tc_num}.${test_index}.log"
     source namespace-create.sh
-    sleep 500
+    sleep 180
     ../../boatload/boatload-sno-du-profile.py ${dryrun} ${csvfile} --csv-title "${total_pods}n-1d-1p-1c-gubu-${probes_csv_titles[$index]}-${iteration}" -n ${total_pods} -d 1 -p 1 -c 1 -v 1 -l -r ${probes[$index]} ${resources} ${gohttp_env_vars} ${measurement} ${INDEX_ARGS} &> ${logfile} --enable-pod-annotations -a ${annotations}
-    oc delete $(oc get pv -o name)
     echo "$(date -u +%Y%m%d-%H%M%S) - node density ${tc_num}.${test_index} - ${iteration}/${iterations} complete, sleeping ${sleep_period}"
     sleep ${sleep_period}
     echo "****************************************************************************************************************************************"
