@@ -7,10 +7,9 @@ metadata:
 spec:
   deviceType: vfio-pci
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f0#0-0
+    - ens6f0#0-0
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 2
@@ -25,10 +24,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#0-0
+    - ens6f1#0-0
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -43,10 +41,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#1-1
+    - ens6f1#1-1
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -61,10 +58,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#2-2
+    - ens6f1#2-2
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -79,10 +75,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#3-3
+    - ens6f1#3-3
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -97,10 +92,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#4-4
+    - ens6f1#4-4
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -115,10 +109,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#5-5
+    - ens6f1#5-5
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -133,10 +126,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#6-6
+    - ens6f1#6-6
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -151,10 +143,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#7-7
+    - ens6f1#7-7
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -169,10 +160,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#8-8
+    - ens6f1#8-8
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -187,10 +177,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#9-9
+    - ens6f1#9-9
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -205,10 +194,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#10-10
+    - ens6f1#10-10
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -223,10 +211,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#11-11
+    - ens6f1#11-11
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -241,10 +228,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#12-12
+    - ens6f1#12-12
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -259,10 +245,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#13-13
+    - ens6f1#13-13
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -277,10 +262,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#14-14
+    - ens6f1#14-14
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -295,10 +279,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#15-15
+    - ens6f1#15-15
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -313,10 +296,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#16-16
+    - ens6f1#16-16
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -331,10 +313,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#17-17
+    - ens6f1#17-17
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -349,10 +330,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#18-18
+    - ens6f1#18-18
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -367,10 +347,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#19-19
+    - ens6f1#19-19
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -385,10 +364,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#20-20
+    - ens6f1#20-20
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -403,10 +381,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#21-21
+    - ens6f1#21-21
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -421,10 +398,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#22-22
+    - ens6f1#22-22
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -439,10 +415,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#23-23
+    - ens6f1#23-23
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -457,10 +432,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#24-24
+    - ens6f1#24-24
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -475,10 +449,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#25-25
+    - ens6f1#25-25
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -493,10 +466,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#26-26
+    - ens6f1#26-26
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -511,10 +483,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#27-27
+    - ens6f1#27-27
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -529,10 +500,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#28-28
+    - ens6f1#28-28
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -547,10 +517,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#29-29
+    - ens6f1#29-29
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -565,10 +534,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#30-30
+    - ens6f1#30-30
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -583,10 +551,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#31-31
+    - ens6f1#31-31
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -601,10 +568,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#32-32
+    - ens6f1#32-32
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -619,10 +585,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#33-33
+    - ens6f1#33-33
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -637,10 +602,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#34-34
+    - ens6f1#34-34
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -655,10 +619,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#35-35
+    - ens6f1#35-35
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -673,10 +636,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#36-36
+    - ens6f1#36-36
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -691,10 +653,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#37-37
+    - ens6f1#37-37
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -709,10 +670,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#38-38
+    - ens6f1#38-38
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -727,10 +687,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#39-39
+    - ens6f1#39-39
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -745,10 +704,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#40-40
+    - ens6f1#40-40
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -763,10 +721,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#41-41
+    - ens6f1#41-41
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -781,10 +738,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#42-42
+    - ens6f1#42-42
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -799,10 +755,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#43-43
+    - ens6f1#43-43
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -817,10 +772,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#44-44
+    - ens6f1#44-44
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -835,10 +789,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#45-45
+    - ens6f1#45-45
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -853,10 +806,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#46-46
+    - ens6f1#46-46
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -871,10 +823,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#47-47
+    - ens6f1#47-47
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -889,10 +840,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#48-48
+    - ens6f1#48-48
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -907,10 +857,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#49-49
+    - ens6f1#49-49
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -925,10 +874,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#50-50
+    - ens6f1#50-50
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -943,10 +891,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#51-51
+    - ens6f1#51-51
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -961,10 +908,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#52-52
+    - ens6f1#52-52
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -979,10 +925,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#53-53
+    - ens6f1#53-53
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -997,10 +942,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#54-54
+    - ens6f1#54-54
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -1015,10 +959,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#55-55
+    - ens6f1#55-55
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -1033,10 +976,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#56-56
+    - ens6f1#56-56
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -1051,10 +993,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#57-57
+    - ens6f1#57-57
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -1069,10 +1010,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#58-58
+    - ens6f1#58-58
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
@@ -1087,10 +1027,9 @@ metadata:
 spec:
   deviceType: netdevice
   isRdma: false
-  linkType: eth
   nicSelector:
     pfNames:
-    - ens3f1#59-59
+    - ens6f1#59-59
   nodeSelector:
     node-role.kubernetes.io/master: ""
   numVfs: 64
