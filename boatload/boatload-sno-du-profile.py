@@ -34,18 +34,20 @@ import uuid
 
 workload_create = """---
 global:
-  writeToFile: true
-  metricsDirectory: metrics
+#  metricsDirectory: metrics
+  #prometheusURL: {{ prometheus_url }}
+ # bearerToken: {{ token }}
   measurements:
   - name: podLatency
-    esIndex: {{ measurements_index }}
+#    esIndex: {{ measurements_index }}
 
   indexerConfig:
-    enabled: {{ indexing }}
-    esServers: [{{ index_server}}]
-    insecureSkipVerify: true
-    defaultIndex: {{ default_index }}
-    type: elastic
+    enabled: true
+#    esServers: [{{ index_server}}]
+#    insecureSkipVerify: true
+#    defaultIndex: {{ default_index }}
+    type: local
+    metricsDirectory: metrics
 
 jobs:
 
@@ -85,6 +87,7 @@ jobs:
     - objectTemplate: workload-deployment-selector.yml
       replicas: {{ deployments }}
       inputVars:
+        automountServiceAccountToken: false
         runtimeClassName: performance-perf-profile
         pod_replicas: {{ pod_replicas }}
         containers: {{ containers }}
@@ -170,7 +173,7 @@ jobs:
     verifyObjects: true
     errorOnVerify: false
     objects:
-    - objectTemplate: workload-deployment-selector.yml
+    - objectTemplate: workload-deployment-selector-bu.yml
       replicas: {{ deployments }}
       inputVars:
         pod_replicas: {{ pod_replicas }}
@@ -246,24 +249,24 @@ jobs:
 
 workload_delete = """---
 global:
-  writeToFile: false
   measurements:
   - name: podLatency
-    esIndex: {{ measurements_index }}
+#    esIndex: {{ measurements_index }}
 
   indexerConfig:
-    enabled: {{ indexing }}
-    esServers: [{{ index_server}}]
-    insecureSkipVerify: true
-    defaultIndex: {{ default_index }}
-    type: elastic
+    enabled: false
+#    esServers: [{{ index_server}}]
+#    insecureSkipVerify: true
+#    defaultIndex: {{ default_index }}
+    type: local
+    metricsDirectory: metrics
 
 jobs:
 - name: cleanup-boatload
   jobType: delete
   waitForDeletion: true
-  qps: 10
-  burst: 20
+  qps: 1
+  burst: 1
   objects:
   - kind: Namespace
     labelSelector: {kube-burner-job: boatload}
@@ -272,8 +275,8 @@ jobs:
 - name: cleanup-boatload-bu
   jobType: delete
   waitForDeletion: true
-  qps: 10
-  burst: 20
+  qps: 1
+  burst: 1
   objects:
   - kind: Namespace
     labelSelector: {kube-burner-job: boatload-bu}
@@ -293,18 +296,20 @@ jobs:
 
 workload_metrics = """---
 global:
-  writeToFile: true
-  metricsDirectory: metrics
+#  metricsDirectory: metrics
+#  prometheusURL: {{ prometheus_url }}
+#  bearerToken: {{ token }}
   measurements:
   - name: podLatency
-    esIndex: {{ measurements_index }}
+#    esIndex: {{ measurements_index }}
 
   indexerConfig:
-    enabled: {{ indexing }}
-    esServers: [{{ index_server}}]
-    insecureSkipVerify: true
-    defaultIndex: {{ default_index }}
-    type: elastic
+    enabled: true
+#    esServers: [{{ index_server}}]
+#    insecureSkipVerify: true
+#    defaultIndex: {{ default_index }}
+    type: local
+    metricsDirectory: metrics
 """
 
 #workload_pv = """---
@@ -350,6 +355,169 @@ spec:
         {{ range .pod_annotations }}
         {{ . }}
         {{ end }}
+        k8s.v1.cni.cncf.io/networks: {{ .net_name }}-{{ .Iteration }}
+      labels:
+        app: boatload-{{ .Iteration }}-{{ .Replica }}
+    spec:
+      automountServiceAccountToken: false
+      runtimeClassName: performance-perf-profile
+      containers:
+      {{ $data := . }}
+      {{ range $index, $element := sequence 1 .containers }}
+      - name: boatload-{{ $element }}
+        image: {{ $data.image }}
+        ports:
+        - containerPort: {{ add $data.starting_port $element }}
+          protocol: TCP
+        resources:
+          requests:
+            {{ if $data.set_requests_cpu }}
+            cpu: {{ $data.resources.requests.cpu }}
+            {{ end }}
+            {{if $data.set_requests_memory }}
+            memory: {{ $data.resources.requests.memory }}
+            {{ end }}
+            {{ if $data.set_requests_hps }}
+            hugepages-1Gi: {{ index $data "resources" "requests" "hugepages-1Gi" }}
+            {{ end }}
+            {{ if $data.net_resource }}
+            openshift.io/{{ $data.net_resource }}_{{ $data.Iteration }}: "1"
+            {{ end }}
+          limits:
+            {{ if $data.set_limits_cpu }}
+            cpu: {{ $data.resources.limits.cpu }}
+            {{ end }}
+            {{ if $data.set_limits_memory }}
+            memory: {{ $data.resources.limits.memory }}
+            {{ end }}
+            {{ if $data.set_limits_hps }}
+            hugepages-1Gi: {{ index $data "resources" "limits" "hugepages-1Gi" }}
+            {{ end }}
+            {{ if $data.net_resource }}
+            openshift.io/{{ $data.net_resource }}_{{ $data.Iteration }}: "1"
+            {{ end }}
+        env:
+        - name: PORT
+          value: "{{ add $data.starting_port $element }}"
+        {{ range $data.container_env_args }}
+        - name: "{{ .name }}"
+          value: "{{ .value }}"
+        {{ end }}
+        {{ if $data.enable_startup_probe }}
+        startupProbe:
+          {{ range $data.startup_probe_args }}
+          {{ . }}
+          {{ end }}
+          {{ if $data.startup_probe_port }}
+            port: {{ add $data.starting_port $element }}
+          {{ end }}
+        {{ end }}
+        {{ if $data.enable_liveness_probe }}
+        livenessProbe:
+          {{ range $data.liveness_probe_args }}
+          {{ . }}
+          {{ end }}
+          {{ if $data.liveness_probe_port }}
+            port: {{ add $data.starting_port $element }}
+          {{ end }}
+        {{ end }}
+        {{ if $data.enable_readiness_probe }}
+        readinessProbe:
+          {{ range $data.readiness_probe_args }}
+          {{ . }}
+          {{ end }}
+          {{ if $data.readiness_probe_port }}
+            port: {{ add $data.starting_port $element }}
+          {{ end }}
+        {{ end }}
+        volumeMounts:
+        {{ range $index, $element := sequence 1 $data.pvcs }}
+        - name: pvc-{{ $element }}
+          mountPath: /etc/pvc-{{ $element }}
+        {{ end }}
+        {{ range $index, $element := sequence 1 $data.configmaps }}
+        - name: cm-{{ $element }}
+          mountPath: /etc/cm-{{ $element }}
+        {{ end }}
+        {{ range $index, $element := sequence 1 $data.secrets }}
+        - name: secret-{{ $element }}
+          mountPath: /etc/secret-{{ $element }}
+        {{ end }}
+        {{ if $data.set_requests_hps }}
+        - name: hugepage
+          mountPath: /dev/hugepages
+        {{ end }}
+      {{ end }}
+      volumes:
+      {{ range $index, $element := sequence 1 .pvcs }}
+      {{ $d_index := add $data.Replica -1 }}
+      {{ $d_pvcs_count := multiply $d_index $data.pvcs }}
+      {{ $pvcs_index := add $d_pvcs_count $element }}
+      - name: pvc-{{ $element }}
+        persistentVolumeClaim:
+          claimName: boatload-{{ $data.Iteration }}-{{ $pvcs_index }}-{{ $data.JobName }}
+      {{ end }}
+      {{ range $index, $element := sequence 1 .configmaps }}
+      {{ $d_index := add $data.Replica -1 }}
+      {{ $d_cm_count := multiply $d_index $data.configmaps }}
+      {{ $cm_index := add $d_cm_count $element }}
+      - name: cm-{{ $element }}
+        configMap:
+          name: boatload-{{ $data.Iteration }}-{{ $cm_index }}-{{ $data.JobName }}
+      {{ end }}
+      {{ range $index, $element := sequence 1 .secrets }}
+      {{ $d_index := add $data.Replica -1 }}
+      {{ $d_s_count := multiply $d_index $data.secrets }}
+      {{ $s_index := add $d_s_count $element }}
+      - name: secret-{{ $element }}
+        secret:
+          secretName: boatload-{{ $data.Iteration }}-{{ $s_index }}-{{ $data.JobName }}
+      {{ end }}
+      {{ if $data.set_requests_hps }}
+      - name: hugepage
+        emptyDir:
+         medium: HugePages
+        restartPolicy: Never
+      {{ end }}
+      nodeSelector:
+        {{ .default_selector }}
+        {{ range $index, $element := sequence 1 .shared_selectors }}
+        boatloads-{{ $element }}: "true"
+        {{ end }}
+        {{ $data := . }}
+        {{ range $index, $element := sequence 1 $data.unique_selectors }}
+        {{ $first := multiply $data.unique_selector_offset $index }}
+        boatloadu-{{ add $first $data.Iteration }}: "true"
+        {{ end }}
+      {{ if .tolerations }}
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+      - key: "node.kubernetes.io/unschedulable"
+        operator: "Exists"
+        effect: "NoExecute"
+      {{ end }}
+"""
+
+workload_deployment_bu = """---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boatload-{{ .Iteration }}-{{ .Replica }}-{{ .JobName }}
+spec:
+  replicas: {{ .pod_replicas }}
+  selector:
+    matchLabels:
+      app: boatload-{{ .Iteration }}-{{ .Replica }}
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
         k8s.v1.cni.cncf.io/networks: {{ .net_name }}-{{ .Iteration }}
       labels:
         app: boatload-{{ .Iteration }}-{{ .Replica }}
@@ -830,8 +998,10 @@ def main():
                       help="The pod annotations")
 
   # Workload container image, port, environment, and resources arguments
+#  parser.add_argument("-i", "--container-image", type=str,
+#                      default="quay.io/redhat-performance/test-gohttp-probe:v0.0.2", help="The container image to use")
   parser.add_argument("-i", "--container-image", type=str,
-                      default="quay.io/redhat-performance/test-gohttp-probe:v0.0.2", help="The container image to use")
+                      default="e28-h29-r750.alias.bos.scalelab.redhat.com:5000/redhat-performance:latest", help="The container image to use")
   parser.add_argument("--container-port", type=int, default=8000,
                       help="The starting container port to expose (PORT Env Var)")
   parser.add_argument("-e", "--container-env", nargs="*", default=default_container_env,
@@ -894,7 +1064,7 @@ def main():
   # Metrics arguments
   parser.add_argument("--metrics-profile", type=str, default="metrics.yaml", help="Metrics profile for kube-burner")
   parser.add_argument("--prometheus-url", type=str, default="", help="Cluster prometheus URL")
-  parser.add_argument("--prometheus-token", type=str, default="", help="Token to access prometheus")
+  parser.add_argument("--token", type=str, default="", help="Token to access prometheus")
   parser.add_argument(
       "--metrics", nargs="*", default=default_metrics_collected, help="List of metrics to collect into metrics.csv")
 
@@ -1023,10 +1193,10 @@ def main():
       else:
         cliargs.prometheus_url = "https://{}".format(output)
 
-    if cliargs.prometheus_token == "" and not (cliargs.prometheus_url == ""):
+    if cliargs.token == "" and not (cliargs.prometheus_url == ""):
       logger.info("Prometheus token not set, attempting to get prometheus "
                   "token with OpenShift client and kubeburner sa")
-      oc_cmd = ["oc", "create", token", "kubeburner", "-n", "default"]
+      oc_cmd = ["oc", "create", "token", "kubeburner", "-n", "default"]
       rc, output = command(oc_cmd, cliargs.dry_run, mask_output=True)
       if rc != 0:
         logger.warning("Unable to determine prometheus token via oc, disabling metrics phase, oc rc: {}".format(rc))
@@ -1034,24 +1204,24 @@ def main():
             "To remedy, as cluster-admin, run 'oc create sa kubeburner -n default' and "
             "'oc adm policy add-cluster-role-to-user -z kubeburner cluster-admin'")
       else:
-        cliargs.prometheus_token = output
+        cliargs.token = output
 
-    if cliargs.prometheus_url == "" or cliargs.prometheus_token == "":
+    if cliargs.prometheus_url == "" or cliargs.token == "":
       logger.warning("Prometheus server or token unset, disabling metrics phase")
       cliargs.no_metrics_phase = True
 
   # Validate indexing args
   indexing_enabled = False
-  if not cliargs.index_server == "":
-    if not cliargs.no_metrics_phase:
-      logger.info("Indexing server is set, indexing measurements and metrics enabled")
-    else:
-      logger.info("Indexing server is set, indexing measurements enabled")
-    clean_server = cliargs.index_server[cliargs.index_server.find("@") + 1:].replace("\"", "")
-    logger.info("Indexing server: {}".format(clean_server))
-    indexing_enabled = True
+#  if not cliargs.index_server == "":
+  if not cliargs.no_metrics_phase:
+    logger.info("Indexing server is set, indexing measurements and metrics enabled")
   else:
-    logger.info("Indexing server is unset, all indexing is disabled")
+    logger.info("Indexing server is set, indexing measurements enabled")
+#    clean_server = cliargs.index_server[cliargs.index_server.find("@") + 1:].replace("\"", "")
+#    logger.info("Indexing server: {}".format(clean_server))
+  indexing_enabled = True
+#  else:
+#    logger.info("Indexing server is unset, all indexing is disabled")
 
   logger.info("Scenario Phases:")
   if not cliargs.no_workload_phase:
@@ -1197,6 +1367,9 @@ def main():
     with open("{}/workload-deployment-selector.yml".format(tmp_directory), "w") as file1:
       file1.writelines(workload_deployment)
     logger.info("Created {}/workload-deployment-selector.yml".format(tmp_directory))
+    with open("{}/workload-deployment-selector-bu.yml".format(tmp_directory), "w") as file1:
+      file1.writelines(workload_deployment_bu)
+    logger.info("Created {}/workload-deployment-selector-bu.yml".format(tmp_directory))
     with open("{}/workload-service.yml".format(tmp_directory), "w") as file1:
       file1.writelines(workload_service)
     logger.info("Created {}/workload-service.yml".format(tmp_directory))
@@ -1212,7 +1385,8 @@ def main():
     with open("{}/workload-pvc.yml".format(tmp_directory), "w") as file1:
       file1.writelines(workload_pvc)
     logger.info("Created {}/workload-pvc.yml".format(tmp_directory))
-    workload_measurements_json = "{}/metrics/boatload-bu-podLatency-summary.json".format(tmp_directory)
+    workload_measurements_json = "{}/metrics/podLatencyQuantilesMeasurement-boatload-bu.json".format(tmp_directory)
+#    workload_measurements_json = "{}/metrics/boatload-bu-podLatency-summary.json".format(tmp_directory)
 
     kb_cmd = ["kube-burner", "init", "-c", "workload-create.yml", "--uuid", workload_UUID]
     rc, _ = command(kb_cmd, cliargs.dry_run, tmp_directory)
@@ -1454,6 +1628,7 @@ def main():
 
   # Metrics Phase
   if not cliargs.no_metrics_phase:
+    time.sleep(180)  
     metrics_start_time = time.time()
     phase_break()
     logger.info("Metrics phase starting ({})".format(int(metrics_start_time * 1000)))
@@ -1490,10 +1665,20 @@ def main():
     else:
       end_time = workload_end_time
 
+    oc_cmd = ["oc", "create", "token", "kubeburner", "-n", "default"]
+    rc, output = command(oc_cmd, cliargs.dry_run, mask_output=True)
+    if rc != 0:
+      logger.warning("Unable to determine prometheus token via oc, disabling metrics phase, oc rc: {}".format(rc))
+      logger.warning(
+          "To remedy, as cluster-admin, run 'oc create sa kubeburner -n default' and "
+          "'oc adm policy add-cluster-role-to-user -z kubeburner cluster-admin'")
+    else:
+      cliargs.token = output
+
     kb_cmd = [
         "kube-burner", "index", "-c", "workload-metrics.yml", "--start", str(int(start_time)),
         "--end", str(int(end_time)), "--uuid", workload_UUID, "-u", cliargs.prometheus_url,
-        "-m", "{}/metrics.yaml".format(tmp_directory), "-t", cliargs.prometheus_token]
+        "-m", "{}/metrics.yaml".format(tmp_directory), "-t", cliargs.token]
     rc, _ = command(kb_cmd, cliargs.dry_run, tmp_directory, mask_arg=16)
     metrics_end_time = time.time()
     if rc != 0:
@@ -1531,7 +1716,8 @@ def main():
     metrics_data = {}
     logger.info("Collecting metric data for metrics csv")
     for metric in cliargs.metrics:
-      metric_json = os.path.join(metrics_dir, "{}-{}.json".format(metric, workload_UUID))
+      metric_json = os.path.join(metrics_dir, "{}.json".format(metric))
+#      metric_json = os.path.join(metrics_dir, "{}-{}.json".format(metric, workload_UUID))
       logger.info("Reading data from {}".format(metric_json))
       try:
         with open(metric_json) as metric_file:
