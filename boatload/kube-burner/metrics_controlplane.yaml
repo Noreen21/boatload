@@ -1,0 +1,611 @@
+# API server
+- query: histogram_quantile(0.99, sum(rate(apiserver_request_duration_seconds_bucket{apiserver="kube-apiserver", verb!~"WATCH", subresource!="log"}[2m])) by (verb,resource,subresource,instance,le)) > 0
+  metricName: API99thLatency
+
+- query: sum(irate(apiserver_request_total{apiserver="kube-apiserver",verb!="WATCH",subresource!="log"}[2m])) by (verb,instance,resource,code) > 0
+  metricName: APIRequestRate
+
+- query: sum(apiserver_current_inflight_requests{}) by (request_kind) > 0
+  metricName: APIInflightRequests
+
+# Containers & pod metrics
+- query: sum(irate(container_cpu_usage_seconds_total{name!="",namespace=~"openshift-(etcd|oauth-apiserver|.*apiserver|ovn-kubernetes|sdn|ingress|authentication|.*controller-manager|.*scheduler|monitoring|logging|image-registry)"}[2m]) * 100) by (pod, namespace, node)
+  metricName: podCPU
+
+- query: sum(container_memory_rss{name!="",namespace=~"openshift-(etcd|oauth-apiserver|.*apiserver|ovn-kubernetes|sdn|ingress|authentication|.*controller-manager|.*scheduler|monitoring|logging|image-registry)"}) by (pod, namespace, node)
+  metricName: podMemory
+
+- query: (sum(rate(container_fs_writes_bytes_total{container!="",device!~".+dm.+"}[5m])) by (device, container, node) and on (node) kube_node_role{role="master"}) > 0
+  metricName: containerDiskUsage
+
+# Kubelet & CRI-O metrics
+- query: irate(process_cpu_seconds_total{service="kubelet",job="kubelet"}[2m]) and on (node) kube_node_role{role="worker"}
+  metricName: kubeletCPU
+
+- query: sum(process_resident_memory_bytes{service="kubelet",job="kubelet"}) by (node) and on (node) kube_node_role{role="worker"}
+  metricName: kubeletMemory
+
+- query: irate(process_cpu_seconds_total{service="kubelet",job="crio"}[2m]) and on (node) kube_node_role{role="worker"}
+  metricName: crioCPU
+
+- query: sum(process_resident_memory_bytes{service="kubelet",job="crio"}) by (node) and on (node) kube_node_role{role="worker"}
+  metricName: crioMemory
+
+# Node metrics
+# For Boatload removed > 0 since usually nice cpu does not show up, but when it does it can throw off the csv file
+# - query: sum(irate(node_cpu_seconds_total[2m])) by (mode,instance) > 0
+- query: sum(irate(node_cpu_seconds_total[2m])) by (mode,instance)
+  metricName: nodeCPU
+
+- query: sum(irate(node_cpu_seconds_total{mode!="idle", mode!="steal"}[2m]) and on (instance) label_replace(kube_node_role{role="master"}, "instance", "$1", "node", "(.+)")) by (instance)
+  metricName: cpu-masters
+
+- query: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) and on (instance) label_replace(kube_node_role{role="master"}, "instance", "$1", "node", "(.+)")
+  metricName: memory-masters
+
+- query: node_memory_MemAvailable_bytes
+  metricName: nodeMemoryAvailable
+
+- query: node_memory_Active_bytes
+  metricName: nodeMemoryActive
+
+- query: avg(node_memory_Cached_bytes) by (instance) + avg(node_memory_Buffers_bytes) by (instance)
+  metricName: nodeMemoryCached+nodeMemoryBuffers
+
+- query: irate(node_network_receive_bytes_total{device=~"^(ens|eth|bond|team).*"}[2m])
+  metricName: rxNetworkBytes
+
+- query: irate(node_network_transmit_bytes_total{device=~"^(ens|eth|bond|team).*"}[2m])
+  metricName: txNetworkBytes
+
+- query: rate(node_disk_written_bytes_total{device!~"^(dm|rb).*"}[2m])
+  metricName: nodeDiskWrittenBytes
+
+- query: rate(node_disk_read_bytes_total{device!~"^(dm|rb).*"}[2m])
+  metricName: nodeDiskReadBytes
+
+- query: sum(rate(etcd_server_leader_changes_seen_total[2m]))
+  metricName: etcdLeaderChangesRate
+
+# Etcd metrics
+- query: etcd_server_is_leader > 0
+  metricName: etcdServerIsLeader
+
+- query: histogram_quantile(0.99, rate(etcd_disk_backend_commit_duration_seconds_bucket[2m]))
+  metricName: 99thEtcdDiskBackendCommitDurationSeconds
+
+- query: histogram_quantile(0.99, rate(etcd_disk_wal_fsync_duration_seconds_bucket[2m]))
+  metricName: 99thEtcdDiskWalFsyncDurationSeconds
+
+- query: histogram_quantile(0.99, rate(etcd_network_peer_round_trip_time_seconds_bucket[5m]))
+  metricName: 99thEtcdRoundTripTimeSeconds
+
+- query: etcd_mvcc_db_total_size_in_bytes
+  metricName: etcdDBPhysicalSizeBytes
+
+- query: etcd_mvcc_db_total_size_in_use_in_bytes
+  metricName: etcdDBLogicalSizeBytes
+
+- query: sum(rate(etcd_object_counts{}[5m])) by (resource) > 0
+  metricName: etcdObjectCount
+
+- query: sum by (cluster_version)(etcd_cluster_version)
+  metricName: etcdVersion
+  instant: true
+
+# Cluster metrics
+- query: sum(kube_namespace_status_phase) by (phase) > 0
+  metricName: namespaceCount
+
+- query: sum(kube_pod_status_phase{}) by (phase)
+  metricName: podStatusCount
+
+- query: count(kube_secret_info{})
+  metricName: secretCount
+
+- query: count(kube_deployment_labels{})
+  metricName: deploymentCount
+
+- query: count(kube_configmap_info{})
+  metricName: configmapCount
+
+- query: count(kube_service_info{})
+  metricName: serviceCount
+
+- query: kube_node_role
+  metricName: nodeRoles
+  instant: true
+
+- query: sum(kube_node_status_condition{status="true"}) by (condition)
+  metricName: nodeStatus
+
+- query: cluster_version{type="completed"}
+  metricName: clusterVersion
+  instant: true
+
+#
+# Boatload added metrics
+#
+- query: sum(kube_node_status_condition{status="true", condition="Ready"})
+  metricName: nodeReadyStatus
+
+# total cpu cores - idle, steal
+# (Worker nodes only)
+- query: sum(node_cpu_info) by (instance) * on (instance) sum without (node) (label_replace(kube_node_role{role="worker"}, "instance", "$1", "node", "(.*)")) - on (instance) sum(irate(node_cpu_seconds_total{mode=~"idle|steal"}[2m])) by (instance)
+  metricName: nodeCoresUsed
+
+# Reducing number of metrics to capture by commenting this metric
+# # total cpu cores - idle+iowait
+# - query: sum(node_cpu_info) by (instance) - on (instance) sum(irate(node_cpu_seconds_total{mode=~"idle|iowait"}[2m])) by (instance)
+#   metricName: nodeCoresNotIdle
+
+# Sourced from /proc/meminfo, total - available = consumed memory
+# (Worker nodes only)
+- query: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) * on (instance) sum without (node) (label_replace(kube_node_role{role="worker"}, "instance", "$1", "node", "(.*)"))
+  metricName: nodeMemoryConsumed
+
+# Kubelet as CPU cores instead of cpu usage %
+- query: sum(irate(process_cpu_seconds_total{service="kubelet",job="kubelet"}[2m])) by (node) and on (node) kube_node_role{role="worker"}
+  metricName: kubeletCoresUsed
+
+# Crio as CPU cores instead of cpu usage %
+- query: sum(irate(process_cpu_seconds_total{service="kubelet",job="crio"}[2m])) by (node) and on (node) kube_node_role{role="worker"}
+  metricName: crioCoresUsed
+
+#ControlPlane Metrics
+- query: topk(3, sum(irate(container_cpu_usage_seconds_total{name!="",namespace=~"openshift-(etcd|oauth-apiserver|.*apiserver|ovn-kubernetes|multus|ingress|authentication|.*controller-manager|.*scheduler|monitoring|logging|image-registry|ptp|sriov-network-operator|local-storage|machine-api|machine-config-operator|cluster-node-tuning-operator|etcd-operator|dns|dns-operator)"}[2m])) by (node))
+  metricName: ControlPlaneCPU
+
+- query: topk(3, sum(container_memory_rss{name!="",namespace=~"openshift-(etcd|oauth-apiserver|.*apiserver|ovn-kubernetes|multus|ingress|authentication|.*controller-manager|.*scheduler|monitoring|logging|image-registry|ptp|network-operator|sriov-network-operator|local-storage|machine-api|machine-config-operator|cluster-node-tuning-operator|etcd-operator|dns|dns-operator)"}) by (node))
+  metricName: ControlPlaneMemory
+
+#- query: avg(sum(irate(container_cpu_usage_seconds_total{name!="",namespace=~"openshift-(etcd|oauth-apiserver|.*apiserver|ovn-kubernetes|multus|ingress|authentication|.*controller-manager|.*scheduler|monitoring|logging|image-registry|ptp|sriov-network-operator|local-storage|machine-api|machine-config-operator|cluster-node-tuning-operator|etcd-operator|dns|dns-operator)"}[2m])) by (node)))
+#  metricName: AvgControlPlaneCPU
+
+# query: avg(sum(container_memory_rss{name!="",namespace=~"openshift-(etcd|oauth-apiserver|.*apiserver|ovn-kubernetes|multus|ingress|authentication|.*controller-manager|.*scheduler|monitoring|logging|image-registry|ptp|network-operator|sriov-network-operator|local-storage|machine-api|machine-config-operator|cluster-node-tuning-operator|etcd-operator|dns|dns-operator)"}) by (node)))
+#  metricName: AvgControlPlaneMemory
+
+# Controller-Manager
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-kube-controller-manager"}[2m])) by (node)
+  metricName: cpu-kube-controller-manager
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-kube-controller-manager"}) by (node)
+  metricName: memory-kube-controller-manager
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-kube-controller-manager-operator"}[2m])) by (node)
+  metricName: cpu-kube-controller-manager-operator
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-kube-controller-manager-operator"}) by (node)
+  metricName: memory-kube-controller-manager-operator
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-controller-manager"}[2m])) by (node)
+  metricName: cpu-openshift-controller-manager
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-controller-manager"}) by (node)
+  metricName: memory-openshift-controller-manager
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-controller-manager-operator"}[2m])) by (node)
+  metricName: cpu-openshift-controller-manager-operator
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-controller-manager-operator"}) by (node)
+  metricName: memory-openshift-controller-manager-operator
+
+# Apiserver
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-kube-apiserver"}[2m])) by (node)
+  metricName: cpu-kube-apiserver
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-kube-apiserver"}) by (node)
+  metricName: memory-kube-apiserver
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-kube-apiserver-operator"}[2m])) by (node)
+  metricName: cpu-kube-apiserver-operator
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-kube-apiserver-operator"}) by (node)
+  metricName: memory-kube-apiserver-operator
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-apiserver"}[2m])) by (node)
+  metricName: cpu-openshift-apiserver
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-apiserver"}) by (node)
+  metricName: memory-openshift-apiserver
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-apiserver-operator"}[2m])) by (node)
+  metricName: cpu-openshift-apiserver-operator
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-apiserver-operator"}) by (node)
+  metricName: memory-openshift-apiserver-operator
+
+# OVNKubernetes - standard & IC
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-ovn-kubernetes", pod=~"(ovnkube-master|ovnkube-control-plane).+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-ovn-control-plane
+
+- query: sum(container_memory_rss{namespace="openshift-ovn-kubernetes", pod=~"(ovnkube-master|ovnkube-control-plane).+", container!="POD", name!=""}) by (node)
+  metricName: memory-ovn-control-plane
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-ovn-kubernetes", pod=~"ovnkube-node.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-ovnkube-node
+
+- query: sum(container_memory_rss{namespace="openshift-ovn-kubernetes", pod=~"ovnkube-node.+", container!="POD", name!=""}) by (node)
+  metricName: memory-ovnkube-node
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-ovn-kubernetes", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-ovn-kubernetes
+
+- query: sum(container_memory_rss{namespace="openshift-ovn-kubernetes", name!="", container!="POD"}) by (node)
+  metricName: memory-ovn-kubernetes
+
+# Openshift-logging
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-logging"}[2m])) by (node)
+  metricName: cpu-logging
+
+- query: sum(container_memory_rss{name!="", container!="POD", namespace="openshift-logging"}) by (node)
+  metricName: memory-logging
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-logging", pod=~"(collector-*).+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-collector-logging
+
+# Openshift-monitoring
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-monitoring"}[2m])) by (node)
+  metricName: cpu-monitoring
+
+- query: sum(container_memory_rss{namespace="openshift-monitoring", name!="", container!="POD"}) by (node)
+  metricName: memory-monitoring
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-monitoring", pod=~"prometheus-k8s.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-prometheus
+
+# openshift-sriov-network-operator
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-sriov-network-operator"}[2m])) by (node)
+  metricName: cpu-sriov
+
+- query: sum(container_memory_rss{namespace="openshift-sriov-network-operator", container!="POD", name!=""}) by (node)
+  metricName: memory-sriov
+
+# openshift-ptp
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-ptp"}[2m])) by (node)
+  metricName: cpu-ptp
+
+- query: sum(container_memory_rss{namespace="openshift-ptp", container!="POD", name!=""}) by (node)
+  metricName: memory-ptp
+
+# local-storage
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-local-storage"}[2m])) by (node)
+  metricName: cpu-local-storage
+
+- query: sum(container_memory_rss{namespace="openshift-local-storage", container!="POD", name!=""}) by (node)
+  metricName: memory-local-storage
+
+# etcd
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-etcd"}[2m])) by (node)
+  metricName: cpu-etcd
+
+- query: sum(container_memory_rss{namespace="openshift-etcd", name!="", container!="POD"}) by (node)
+  metricName: memory-etcd
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-etcd-operator"}[2m])) by (node)
+  metricName: cpu-etcd-operator
+
+- query: sum(container_memory_rss{namespace="openshift-etcd-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-etcd-operator
+
+# dns
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-dns", container!="POD"}[2m])) by (node)
+  metricName: cpu-dns
+
+- query: sum(container_memory_rss{namespace="openshift-dns", name!="", container!="POD"}) by (node)
+  metricName: memory-dns
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-dns-operator"}[2m])) by (node)
+  metricName: cpu-dns-operator
+
+- query: sum(container_memory_rss{namespace="openshift-dns-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-dns-operator
+
+# oauth-apiserver
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-oauth-apiserver"}[2m])) by (node)
+  metricName: cpu-oauth-apiserver
+
+- query: sum(container_memory_rss{namespace="openshift-oauth-apiserver", name!="", container!="POD"}) by (node)
+  metricName: memory-oauth-apiserver
+
+# multus
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-multus"}[2m])) by (node)
+  metricName: cpu-multus
+
+- query: sum(container_memory_rss{namespace="openshift-multus", container!="POD", name!=""}) by (node)
+  metricName: memory-multus
+
+# authentication
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-authentication"}[2m])) by (node)
+  metricName: cpu-authentication
+
+- query: sum(container_memory_rss{namespace="openshift-authentication", container!="POD", name!=""}) by (node)
+  metricName: memory-authentication
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-authentication-operator"}[2m])) by (node)
+  metricName: cpu-authentication-operator
+
+- query: sum(container_memory_rss{namespace="openshift-authentication-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-authentication-operator
+
+# ingress
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-ingress"}[2m])) by (node)
+  metricName: cpu-ingress
+
+- query: sum(container_memory_rss{namespace="openshift-ingress", container!="POD", name!=""}) by (node)
+  metricName: memory-ingress
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-ingress-canary"}[2m])) by (node)
+  metricName: cpu-ingress-canary
+
+- query: sum(container_memory_rss{namespace="openshift-ingress-canary", name!="", container!="POD"}) by (node)
+  metricName: memory-ingress-canary
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-ingress-operator"}[2m])) by (node)
+  metricName: cpu-ingress-operator
+
+- query: sum(container_memory_rss{namespace="openshift-ingress-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-ingress-operator
+
+# kube-scheduler
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-kube-scheduler", container!="POD"}[2m])) by (node)
+  metricName: cpu-kube-scheduler
+
+- query: sum(container_memory_rss{namespace="openshift-kube-scheduler", name!="", container!="POD"}) by (node)
+  metricName: memory-kube-scheduler
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-kube-scheduler-operator"}[2m])) by (node)
+  metricName: cpu-kube-scheduler-operator
+
+- query: sum(container_memory_rss{namespace="openshift-kube-scheduler-operator", container!="POD", name!=""}) by (node)
+  metricName: memory-kube-scheduler-operator
+
+# image-registry
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-image-registry"}[2m])) by (node)
+  metricName: cpu-image-registry
+
+- query: sum(container_memory_rss{namespace="openshift-image-registry", container!="POD", name!=""}) by (node)
+  metricName: memory-image-registry
+
+# cluster-node-tuning-operator
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-cluster-node-tuning-operator"}[2m])) by (node)
+  metricName: cpu-nto
+
+- query: sum(container_memory_rss{namespace="openshift-cluster-node-tuning-operator", container!="POD", name!=""}) by (node)
+  metricName: memory-nto
+
+# machine-api
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-machine-api"}[2m])) by (node)
+  metricName: cpu-machine-api
+
+- query: sum(container_memory_rss{namespace="openshift-machine-api", container!="POD", name!=""}) by (node)
+  metricName: memory-machine-api
+
+# machine-config-operator
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-machine-config-operator"}[2m])) by (node)
+  metricName: cpu-mco
+
+- query: sum(container_memory_rss{namespace="openshift-machine-config-operator", container!="POD", name!=""}) by (node)
+  metricName: memory-mco
+
+# vran-accelerator
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="vran-acceleration-operators"}[2m])) by (node)
+  metricName: cpu-vran
+
+- query: sum(container_memory_rss{namespace="vran-acceleration-operators", container!="POD", name!=""}) by (node)
+  metricName: memory-vran
+
+# marketplace
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-marketplace"}[2m])) by (node)
+  metricName: cpu-marketplace
+
+- query: sum(container_memory_rss{namespace="openshift-marketplace", name!="", container!="POD"}) by (node)
+  metricName: memory-marketplace
+
+# service-ca
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-service-ca", container!="POD"}[2m])) by (node)
+  metricName: cpu-service-ca
+
+- query: sum(container_memory_rss{namespace="openshift-service-ca", name!="", container!="POD"}) by (node)
+  metricName: memory-service-ca
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-service-ca-operator"}[2m])) by (node)
+  metricName: cpu-service-ca-operator
+
+- query: sum(container_memory_rss{namespace="openshift-service-ca-operator", container!="POD", name!=""}) by (node)
+  metricName: memory-service-ca-operator
+
+# kube-storage-version
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-kube-storage-version-migrator"}[2m])) by (node)
+  metricName: cpu-ksv
+
+- query: sum(container_memory_rss{namespace="openshift-kube-storage-version-migrator", container!="POD", name!=""}) by (node)
+  metricName: memory-ksv
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-kube-storage-version-migrator-operator"}[2m])) by (node)
+  metricName: cpu-ksv-operator
+
+- query: sum(container_memory_rss{namespace="openshift-kube-storage-version-migrator-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-ksv-operator
+
+# openshift-network-node-identity
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", container!="POD", namespace="openshift-network-node-identity"}[2m])) by (node)
+  metricName: cpu-nni
+
+- query: sum(container_memory_rss{namespace="openshift-network-node-identity", name!="", container!="POD"}) by (node)
+  metricName: memory-nni
+
+#openshift-cloud-controller-manager-operator
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-cloud-controller-manager-operator", container!="POD"}[2m])) by (node)
+  metricName: cpu-ccmo
+
+- query: sum(container_memory_rss{namespace="openshift-cloud-controller-manager-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-ccmo
+
+#openshift-cloud-credential-operator
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-cloud-credential-operator", container!="POD"}[2m])) by (node)
+  metricName: cpu-cco
+
+- query: sum(container_memory_rss{namespace="openshift-cloud-credential-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-cco
+
+#openshift-cluster-machine-approver
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-cluster-machine-approver", container!="POD"}[2m])) by (node)
+  metricName: cpu-cma
+
+- query: sum(container_memory_rss{namespace="openshift-cluster-machine-approver", name!="", container!="POD"}) by (node)
+  metricName: memory-cma
+
+#openshift-cluster-version
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-cluster-version", container!="POD"}[2m])) by (node)
+  metricName: cpu-ocv
+
+- query: sum(container_memory_rss{namespace="openshift-cluster-version", name!="", container!="POD"}) by (node)
+  metricName: memory-ocv
+
+#openshift-network-operator
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-network-operator", container!="POD"}[2m])) by (node)
+  metricName: cpu-no
+
+- query: sum(container_memory_rss{namespace="openshift-network-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-no
+
+#openshift-route-controller-manager
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-route-controller-manager", container!="POD"}[2m])) by (node)
+  metricName: cpu-rcm
+
+- query: sum(container_memory_rss{namespace="openshift-route-controller-manager", name!="", container!="POD"}) by (node)
+  metricName: memory-rcm
+
+# openshift-operator-lifecycle-manager
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-operator-lifecycle-manager", container!="POD"}[2m])) by (node)
+  metricName: cpu-olm
+
+- query: sum(container_memory_rss{namespace="openshift-operator-lifecycle-manager", name!="", container!="POD"}) by (node)
+  metricName: memory-olm
+
+# openshift-config-operator
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-config-operator", container!="POD"}[2m])) by (node)
+  metricName: cpu-co
+
+- query: sum(container_memory_rss{namespace="openshift-config-operator", name!="", container!="POD"}) by (node)
+  metricName: memory-co
+
+# LSO pods
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-local-storage", pod=~"diskmaker-manager.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-disk-manager
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-local-storage", pod=~"local-storage-operator.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-lso
+
+# Monitoring pods
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"prometheus-adapter.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-prom-ad
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"prometheus-operator.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-prom-op
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"thanos-querier.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-thanos
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"openshift-state-metrics.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-osm
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"kube-state-metrics.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-ksm
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"node-exporter.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-node-exporter
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"cluster-monitoring-operator.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-cmo
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"prometheus-operator-admission-webhook.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-prom-aw
+
+- query: sum(irate(container_cpu_usage_seconds_total{name!="", namespace="openshift-monitoring", pod=~"telemeter-client.+", container!="POD"}[2m])) by (node)
+  metricName: cpu-telemeter
+
+# Logging pods
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-logging", pod=~"cluster-logging-operator.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-clo
+
+# Marketplace Pods
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-marketplace", pod=~"marketplace-operator.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-marketplace-op
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-marketplace", pod=~"redhat-operator-index.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-marketplace-index
+
+# MCO
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-machine-config-operator", pod=~"machine-config-controller.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-mco-mcc
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-machine-config-operator", pod=~"machine-config-daemon.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-mco-mcd
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-machine-config-operator", pod=~"machine-config-operator.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-mco-pod
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-machine-config-operator", pod=~"machine-config-server.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-mco-mcs
+
+#Multus
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-multus", pod=~"multus.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-multus-pod
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-multus", pod=~"multus-admission-controller.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-multus-ac
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-multus", pod=~"multus-additional-cni-plugins.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-multus-acp
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-multus", pod=~"network-metrics-daemon.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-multus-nmd
+
+# SRIOV
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-sriov-network-operator", pod=~"network-resources-injector.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-sriov-nri
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-sriov-network-operator", pod=~"operator-webhook.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-sriov-ow
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-sriov-network-operator", pod=~"sriov-device-plugin.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-sriov-dp
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-sriov-network-operator", pod=~"sriov-network-config-daemon.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-sriov-ncd
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-sriov-network-operator", pod=~"sriov-network-operator.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-sriov-op
+
+# PTP
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-ptp", pod=~"linuxptp-daemon.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-ptp-linux
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-ptp", pod=~"ptp-operator.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-ptp-op
+
+# OLM
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-operator-lifecycle-manager", pod=~"catalog-operator.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-olm-co
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-operator-lifecycle-manager", pod=~"olm-operator.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-olm-op
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-operator-lifecycle-manager", pod=~"package-server-manager.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-olm-psm
+
+- query: sum(irate(container_cpu_usage_seconds_total{namespace="openshift-operator-lifecycle-manager", pod=~"packageserver.+", container!="POD", name!=""}[2m])) by (node)
+  metricName: cpu-olm-ps
+
